@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 
+use app\models\Post;
 use core\base\Controller;
 
 class MainController extends Controller
@@ -10,11 +11,13 @@ class MainController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('home');
+        $posts = Post::findAll();
+        return $this->render('home', ['posts' => $posts]);
     }
 
     public function actionAbout()
     {
-        return $this->render('about');
+        $post = Post::findOne(['title ', ' like ', '%First%']);
+        return $this->render('about', ['post'=> $post]);
     }
 }
